@@ -1,6 +1,7 @@
 *.o
 ashmem
 display-info
+dlopen
 hal-copybit
 hal-gralloc
 hal-info
