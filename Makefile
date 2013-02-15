@@ -32,10 +32,12 @@ CXXFLAGS=-fno-exceptions
 #-lGLESv2 -lGLESv1_CM -lEGL -lui
 
 
-all: hello hellocpp \
-     dlopen ashmem hal-info \
+ALL = hello hellocpp \
+     dlopen ashmem \
+     hal-info hal-gralloc hal-copybit \
      display-info gralloc surface-client
 
+all: $(ALL)
 
 hello.o: hello.c
 hellocpp.o: hellocpp.cpp
@@ -75,6 +77,10 @@ gles-info.o: gles-info.c
 
 dlopen: EXTRA_LIBS=-ldl
 
+push:
+	for exe in $(ALL); do \
+	    adb push $$exe /data/local; \
+	done
 
 push-%: %
 	adb push $^ /data/local
