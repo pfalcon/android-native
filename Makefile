@@ -1,6 +1,7 @@
 NDK_ROOT=/home/pfalcon/devel/android-ndk-r5b
 #AOSP_ROOT=/home/pfalcon/projects-3rdparty/android-donut
 AOSP_ROOT=/home/pfalcon/projects-3rdparty/android-gingerbread
+AOSP_HEADERS=android-platform-headers/android-2.3.5_r1
 CROSS_COMPILE=arm-linux-androideabi-
 API_LEVEL=9
 ARCH=arm
@@ -14,9 +15,9 @@ LDLIBS_PATH=lib-nooktablet/
 CPPFLAGS = \
     -I$(PLATFORM_PATH)/usr/include \
     -I$(NDK_ROOT)/sources/cxx-stl/system/include \
-    -I$(AOSP_ROOT)/system/core/include \
-    -I$(AOSP_ROOT)/frameworks/base/include \
-    -I$(AOSP_ROOT)/frameworks/base/native/include \
+    -I$(AOSP_HEADERS)/system/core/include \
+    -I$(AOSP_HEADERS)/frameworks/base/include \
+    -I$(AOSP_HEADERS)/frameworks/base/native/include \
     -I$(AOSP_ROOT)/hardware/libhardware/include \
     -I$(AOSP_ROOT)/external/skia/include \
     -I.
