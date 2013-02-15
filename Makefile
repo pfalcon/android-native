@@ -1,4 +1,5 @@
 NDK_ROOT=/home/pfalcon/devel/android-ndk-r5b
+#AOSP_ROOT=/home/pfalcon/projects-3rdparty/android-donut
 AOSP_ROOT=/home/pfalcon/projects-3rdparty/android-gingerbread
 CROSS_COMPILE=arm-linux-androideabi-
 API_LEVEL=9
@@ -9,7 +10,7 @@ CXX=$(CROSS_COMPILE)g++
 LD=$(CROSS_COMPILE)ld
 PLATFORM_PATH=$(NDK_ROOT)/platforms/android-$(API_LEVEL)/arch-$(ARCH)
 LDLIBS_PATH_SDK=$(PLATFORM_PATH)/usr/lib
-LDLIBS_PATH=lib-zte180/
+LDLIBS_PATH=lib-nooktablet/
 CPPFLAGS = \
     -I$(PLATFORM_PATH)/usr/include \
     -I$(NDK_ROOT)/sources/cxx-stl/system/include \
@@ -31,7 +32,9 @@ CXXFLAGS=-fno-exceptions
 #-lGLESv2 -lGLESv1_CM -lEGL -lui
 
 
-all: hello hellocpp resize displayinfo hal-info gralloc
+all: hello hellocpp \
+     dlopen ashmem hal-info \
+     display-info gralloc surface-client
 
 
 hello.o: hello.c
@@ -40,8 +43,17 @@ hellocpp.o: hellocpp.cpp
 hello: hello.o
 hellocpp: hellocpp.o
 
+ashmem: EXTRA_LIBS=-lcutils
+ashmem.o: ashmem.c
+
+resize: EXTRA_LIBS=-lsurfaceflinger_client
 resize.o: resize.cpp
+
+display-info: EXTRA_LIBS=-lsurfaceflinger_client
 display-info.o: display-info.cpp
+
+surface-client: EXTRA_LIBS=-lsurfaceflinger_client
+surface-client.o: surface-client.cpp
 
 hal-info: EXTRA_LIBS=-lhardware
 hal-info.o: hal-info.c
@@ -60,6 +72,8 @@ gles.o: gles.c
 
 gles-info: EXTRA_LIBS=-lGLESv1_CM -lui
 gles-info.o: gles-info.c
+
+dlopen: EXTRA_LIBS=-ldl
 
 
 push-%: %
