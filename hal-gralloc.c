@@ -13,6 +13,13 @@ void print_module_info(const struct hw_module_t *mod_info)
     printf("author: %s\n", mod_info->author);
 }
 
+void check_root()
+{
+    if (geteuid() != 0) {
+        printf("Warning: this app will likely fail without root privileges\n");
+    }
+}
+
 int main(int argc, char *argv[])
 {
     int i;
@@ -20,6 +27,8 @@ int main(int argc, char *argv[])
     const gralloc_module_t *gralloc = NULL;
     framebuffer_device_t *fb_dev = NULL;
     alloc_device_t *gr_dev = NULL;
+
+    check_root();
 
     int status = hw_get_module("gralloc", &mod_info);
     gralloc = (gralloc_module_t*)mod_info;
