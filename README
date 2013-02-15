@@ -1,3 +1,6 @@
 This is collection of bunch of example application and utilities for
 exploration of native Android (essentially, Linux) environment -
 written by repo maintainer, collected from the net, and pulled from AOSP.
+
+This project depends on https://github.com/pfalcon/android-platform-headers
+(and so far, still on AOSP tree).
