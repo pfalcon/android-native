@@ -12,15 +12,21 @@ LD=$(CROSS_COMPILE)ld
 PLATFORM_PATH=$(NDK_ROOT)/platforms/android-$(API_LEVEL)/arch-$(ARCH)
 LDLIBS_PATH_SDK=$(PLATFORM_PATH)/usr/lib
 LDLIBS_PATH=lib-nooktablet/
+# Path to compiler C++ headers, these are tricky with NDK
+CXX_HEADERS=-I$(NDK_ROOT)/sources/cxx-stl/system/include
+
 CPPFLAGS = \
     -I$(PLATFORM_PATH)/usr/include \
-    -I$(NDK_ROOT)/sources/cxx-stl/system/include \
+    $(CXX_HEADERS) \
     -I$(AOSP_HEADERS)/system/core/include \
     -I$(AOSP_HEADERS)/frameworks/base/include \
     -I$(AOSP_HEADERS)/frameworks/base/native/include \
-    -I$(AOSP_ROOT)/hardware/libhardware/include \
-    -I$(AOSP_ROOT)/external/skia/include \
+    -I$(AOSP_HEADERS)/hardware/libhardware/include \
+    $(EXTRA_INCLUDES)
+
+#    -I$(AOSP_ROOT)/external/skia/include \
     -I.
+
 CXXFLAGS=-fno-exceptions
 
 %: %.o
@@ -78,6 +84,7 @@ gles-info: EXTRA_LIBS=-lGLESv1_CM -lui
 gles-info.o: gles-info.c
 
 dlopen: EXTRA_LIBS=-ldl
+dlopen.o: dlopen.c
 
 push:
 	for exe in $(ALL); do \
