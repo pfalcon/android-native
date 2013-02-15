@@ -1,4 +1,6 @@
 *.o
+lib-*
+android-platform-headers
 ashmem
 display-info
 dlopen
