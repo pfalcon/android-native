@@ -50,8 +50,17 @@ int main(int argc, char *argv[])
     struct copybit_device_t * copybit_dev = NULL;
 
     status = hw_get_module("gralloc", &gralloc_mod);
+    if (status != 0) {
+        printf("Could not open gralloc HAL module\n");
+        exit(1);
+    }
     gralloc = (gralloc_module_t*)gralloc_mod;
+
     status = hw_get_module("copybit", &copybit_mod);
+    if (status != 0) {
+        printf("Could not open copybit HAL module\n");
+        exit(1);
+    }
 
     printf("gralloc info:\n");
     print_module_info(gralloc_mod);
