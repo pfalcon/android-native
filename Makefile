@@ -36,7 +36,8 @@ CXXFLAGS=-fno-exceptions
 ALL = hello hellocpp \
      dlopen ashmem \
      hal-info hal-gralloc hal-copybit \
-     display-info gralloc surface-client
+     display-info gralloc surface-client \
+     gles-info
 
 all: $(ALL)
 
@@ -91,3 +92,6 @@ run-%: %
 
 clean:
 	rm -f *.o
+
+distclean: clean
+	rm -f $(ALL)
