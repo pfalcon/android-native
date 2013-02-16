@@ -1,6 +1,4 @@
 NDK_ROOT=/home/pfalcon/devel/android-ndk-r5b
-#AOSP_ROOT=/home/pfalcon/projects-3rdparty/android-donut
-AOSP_ROOT=/home/pfalcon/projects-3rdparty/android-gingerbread
 AOSP_HEADERS=android-platform-headers/android-2.3.5_r1
 CROSS_COMPILE=arm-linux-androideabi-
 API_LEVEL=9
