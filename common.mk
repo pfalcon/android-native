@@ -1,5 +1,6 @@
+TOP ?= .
 NDK_ROOT=/home/pfalcon/devel/android-ndk-r5b
-AOSP_HEADERS=android-platform-headers/android-2.3.5_r1
+AOSP_HEADERS=$(TOP)/android-platform-headers/android-2.3.5_r1
 CROSS_COMPILE=arm-linux-androideabi-
 API_LEVEL=9
 ARCH=arm
@@ -9,7 +10,7 @@ CXX=$(CROSS_COMPILE)g++
 LD=$(CROSS_COMPILE)ld
 PLATFORM_PATH=$(NDK_ROOT)/platforms/android-$(API_LEVEL)/arch-$(ARCH)
 LDLIBS_PATH_SDK=$(PLATFORM_PATH)/usr/lib
-LDLIBS_PATH=lib-nooktablet/
+LDLIBS_PATH=$(TOP)/lib-nooktablet/
 # Path to compiler C++ headers, these are tricky with NDK
 CXX_HEADERS=-I$(NDK_ROOT)/sources/cxx-stl/system/include
 
